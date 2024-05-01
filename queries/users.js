@@ -54,6 +54,7 @@ const createNewUser = async (item) => {
 //PUT "/:id"
 const updateUserById = async(id, item) => {
     const { street, city, state, zip } = item;
+    console.log(`the user is updating their address to \n`)
     console.log(item)
     
     try {
