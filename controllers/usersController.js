@@ -1,5 +1,6 @@
 const express = require("express");
 const { getAllUsers, createNewUser, updateUserById, deleteUserById, getSingleUserByUID } = require("../queries/users");
+const { createNewPreference } = require("../queries/preferences");
 const users = express.Router();
 
 /**
@@ -43,7 +44,7 @@ users.get("/:id", async (req, res) => {
  */
 users.post("/", async (req,res) => {
     try{
-        createNewUser(req.body)
+        const newUser = await createNewUser(req.body).then(async (user) =>  await createNewPreference(user.user_uid, {}));
     } catch(error){
         res.status(400).json({error: "something missing"});
     }
